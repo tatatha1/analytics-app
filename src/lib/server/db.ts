@@ -1,6 +1,8 @@
 import pg from 'pg';
-import { DATABASE_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import net from 'net';
+
+const DATABASE_URL = env.DATABASE_URL || '';
 
 let pool: pg.Pool | null = null;
 let dbAvailable = false;

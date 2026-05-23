@@ -2,7 +2,6 @@ import { json } from '@sveltejs/kit';
 import { getChannelData, getChannelIdByHandle, getVideoTimeline } from '$lib/server/youtube';
 import { computeAndStoreYouTubeMetrics, storeTimelineInMemory, storeVideoEngagement } from '$lib/server/metrics';
 import { getCached, setCache, buildCacheKey } from '$lib/server/cache';
-import { CACHE_TTL_MS } from '$env/static/private';
 import type { RequestEvent } from './$types';
 
 export async function GET({ url }: RequestEvent) {
@@ -59,7 +58,7 @@ export async function GET({ url }: RequestEvent) {
 		metrics
 	};
 
-	await setCache(cacheKey, result, parseInt(CACHE_TTL_MS) || 3600000);
+	await setCache(cacheKey, result, 3600000);
 
 	return json(result);
 }

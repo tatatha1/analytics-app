@@ -1,6 +1,8 @@
-import { YOUTUBE_API_KEY } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { getCached, setCache, buildCacheKey } from './cache';
 import type { YouTubeChannelData, YouTubeVideo } from '$lib/types';
+
+const YOUTUBE_API_KEY = env.YOUTUBE_API_KEY || '';
 
 export function parseDurationIso(duration: string): number {
 	const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);

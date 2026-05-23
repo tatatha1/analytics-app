@@ -1,4 +1,8 @@
-import { DEEPSEEK_API_KEY, DEEPSEEK_API_URL, DEEPSEEK_MODEL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+
+const DEEPSEEK_API_KEY = env.DEEPSEEK_API_KEY || '';
+const DEEPSEEK_API_URL = env.DEEPSEEK_API_URL || 'https://api.deepseek.com/v1/chat/completions';
+const DEEPSEEK_MODEL = env.DEEPSEEK_MODEL || 'deepseek-chat';
 import type { AIReport, YouTubeChannelData, YouTubeVideo, InstagramProfileData, InstagramPost } from '$lib/types';
 import { extractInstagramHandle, extractYouTubeHandle } from './social-links';
 import { searchInstagramUsers } from './instagram';

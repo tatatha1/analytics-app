@@ -2,7 +2,6 @@ import { json } from '@sveltejs/kit';
 import { getProfileData, getRecentPosts } from '$lib/server/instagram';
 import { computeAndStoreInstagramMetrics, storeInstagramPosts } from '$lib/server/metrics';
 import { getCached, setCache, buildCacheKey } from '$lib/server/cache';
-import { CACHE_TTL_MS } from '$env/static/private';
 import type { RequestEvent } from './$types';
 
 export async function GET({ url }: RequestEvent) {
@@ -27,7 +26,7 @@ export async function GET({ url }: RequestEvent) {
 		storeInstagramPosts(profileData.id, posts, profileData.follower_count);
 
 		const result = { profile: profileData, posts, metrics };
-		await setCache(cacheKey, result, parseInt(CACHE_TTL_MS) || 3600000);
+		await setCache(cacheKey, result, 3600000);
 
 		return json(result);
 	} catch (err) {

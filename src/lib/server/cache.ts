@@ -1,5 +1,7 @@
 import Redis from 'ioredis';
-import { REDIS_URL } from '$env/static/private';
+import { env } from '$env/dynamic/private';
+
+const REDIS_URL = env.REDIS_URL || '';
 
 const DEFAULT_TTL_MS = 60 * 60 * 1000; // 1 hour
 
